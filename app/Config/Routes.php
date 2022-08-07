@@ -41,10 +41,19 @@ $routes->post('/login', 'UserController::loginProcess');
 $routes->post('/logout', 'UserController::logout');
 $routes->get('/register', 'UserController::register');
 $routes->post('/register', 'UserController::registerProcess');
+
+#role koordinator
 $routes->get('/koordinator/daftar_pengajuan_aktivitas', 'ActivityController::listOfActivity');
+$routes->get('/koordinator/daftar_pengajuan_aktivitas/(:any)', 'ActivityController::listOfActivityByStaff/$1');
+$routes->get('/koordinator/setuju/(:alphanum)', 'ActivityController::approveActivity/$1');
+$routes->get('/koordinator/tolak/(:alphanum)', 'ActivityController::rejectActivity/$1');
+
+$routes->get('/koordinator/daftar_staf', 'ActivityController::listOfStaff');
+
 $routes->get('/staf/pengajuan', 'ActivityController::pengajuan');
+$routes->post('/staf/pengajuan', 'ActivityController::addActivityProcess');
 $routes->get('/staf/aktivitas', 'ActivityController::aktivitas');
-$routes->post('/staf/aktivitas', 'ActivityController::addActivityProcess');
+
 
 
 

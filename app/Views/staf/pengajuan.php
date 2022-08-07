@@ -9,14 +9,14 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="/aktivitas">my-Activity</a>
+        <a class="navbar-brand" href="/staf/aktivitas">my-Activity</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/pengajuan">Pengajuan</a>
+              <a class="nav-link active" href="/staf/pengajuan">Pengajuan</a>
             </li>
               <li class="nav-item">
-              <a class="nav-link active" href="/aktivitas">Aktivitas</a>
+              <a class="nav-link active" href="/staf/aktivitas">Aktivitas</a>
             </li>
           </ul>
           <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
@@ -42,7 +42,7 @@
                 <div class="col-md-5">
                   <h4 class="mt-3"><?= $add_title; ?></h4>
                   <hr>
-                  <form method="post" action="/pengajuan">
+                  <form method="post" action="/staf/pengajuan">
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Nama Aktivitas</label>
                       <input type="text" class="form-control" name="nama" required autofocus>

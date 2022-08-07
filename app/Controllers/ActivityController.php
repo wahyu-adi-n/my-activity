@@ -3,31 +3,74 @@
 namespace App\Controllers;
 
 use App\Models\ActivityModel;
+use App\Models\UserModel;
 use App\Controllers\BaseController;
 
 class ActivityController extends BaseController
 {
-    public function listOfActivity()
+    public function listOfStaff()
     {
-        if ((session()->get('level') == 'staf') || (session()->get('level') == 'koordinator')) {
-            return view('activity/pengajuan', [
-                'pengajuan_title' => 'Daftar Pengajuan Aktivitas',
-                'add_title' => 'Pengajuan Aktivitas',
-                'activity' => model('ActivityModel')->getAllDataActivities(),
+        if (session()->get('level') == 'koordinator') {
+            return view('/koordinator/daftar_staf', [
+                'daftar_staf_title' => 'Daftar Staf',
+                'staff' => model('UserModel')->getAllDataStaff(),
             ]);
         } else {
-            session()->setFlashdata('fail', 'Anda Belum Login!');
+            session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
             return redirect()->redirect('/login');
         }
     }
-
+    
+    public function listOfActivity()
+    {
+        if (session()->get('level') == 'koordinator'){
+            return view('/koordinator/daftar_pengajuan_aktivitas', [
+                'daftar_pengajuan_title' => 'Daftar Pengajuan Aktivitas',
+                'activity' => model('ActivityModel')->getAllDataActivities(),
+            ]);
+        } else {
+            session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
+            return redirect()->redirect('/login');
+        }
+    }
+    
+    public function listOfActivityByStaff($kode)
+    {
+        if (session()->get('level') == 'koordinator'){
+            return view('/koordinator/daftar_pengajuan_aktivitas', [
+                'daftar_pengajuan_title' => 'Daftar Pengajuan Aktivitas',
+                'activity' => model('ActivityModel')->getAllDataActivities($kode),
+            ]);
+        } else {
+            session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
+            return redirect()->redirect('/login');
+        }
+    }
+    
+    public function approveActivity($activity) 
+    {
+        if (session()->get('level') == 'koordinator'){
+            $activity = new ActivityModel();
+            $activity->save([
+                'kode_aktivitas' => $activity,
+                'status' => 1,
+            ]);
+            session()->setFlashdata('success', 'Aktivitas Berhasil Disetujui!');
+            return redirect()->redirect("/koordinator/daftar_pengajuan_aktivitas");
+        } else {
+            session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
+            return redirect()->redirect('/login');
+        }
+    }
+    
     public function pengajuan()
     {
-        if ((session()->get('level') == 'staf') || (session()->get('level') == 'koordinator')) {
-            return view('activity/pengajuan', [
+        if (session()->get('level') == 'staf') {
+            $kode = session()->get('kode_user');
+            return view('/staf/pengajuan', [
                 'pengajuan_title' => 'Daftar Pengajuan Aktivitas',
                 'add_title' => 'Pengajuan Aktivitas',
-                'activity' => model('ActivityModel')->getAllDataActivities(),
+                'activity' => model('ActivityModel')->getAllDataActivities($kode),
             ]);
         } else {
             session()->setFlashdata('fail', 'Anda Belum Login!');
@@ -38,7 +81,7 @@ class ActivityController extends BaseController
     public function aktivitas()
     {
         if ((session()->get('level') == 'staf') || (session()->get('level') == 'koordinator')) {
-            return view('activity/aktivitas', [
+            return view('/staf/aktivitas', [
                 'aktivitas_title' => 'Daftar Aktivitas',
                 'activity' => model('ActivityModel')->getAllDataActiveActivities(),
             ]);
@@ -53,6 +96,7 @@ class ActivityController extends BaseController
         $activity = new ActivityModel();
         $activity->save([
             'kode_aktivitas' => "aktivitas-".md5(random_int(1,10)),
+            'kode_user' => session()->get('kode_user'),
             'nama' => $this->request->getVar('nama'),
             'deskripsi' => $this->request->getVar('deskripsi'),
         ]);

@@ -9,14 +9,14 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="/aktivitas">my-Activity</a>
+        <a class="navbar-brand" href="/koordinator/daftar_staf">my-Activity</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/pengajuan">Pengajuan</a>
+              <a class="nav-link active" href="/koordinator/daftar_staf">Daftar Staf</a>
             </li>
               <li class="nav-item">
-              <a class="nav-link active" href="/aktivitas">Aktivitas</a>
+              <a class="nav-link active" href="/koordinator/daftar_pengajuan_aktivitas">Daftar Pengajuan Aktivitas</a>
             </li>
           </ul>
           <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
@@ -40,46 +40,39 @@
             <div class="container container--mini">
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="mt-3"><?= $aktivitas_title; ?></h4>
+                  <h4 class="mt-3"><?= $daftar_staf_title; ?></h4>
                   <hr>
                   <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
+                          <th scope="col">Kode</th>
                           <th scope="col">Nama</th>
-                          <th scope="col">Deskripsi</th>
-                          <th scope="col">Status</th>
+                          <th scope="col">Email</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
                           $no = 1;
-                          foreach ($activity as $act) :
+                          foreach ($staff as $staf) :
                         ?>
                       
                           <tr>
-                            <td><?= $no++; ?></td>
                             <td>
-                            <?php
-                            if ($act['status'] == 3) {
-                              echo "<p class='text-decoration-line-through'>".$act['nama']."</p>";
-                            } else {
-                              echo $act['nama'];
-                            }
-                            ?>
+                              <?= $no++; ?>
                             </td>
-                            <td><?= $act['deskripsi']; ?></td>
-                            <td>
-                              <?php 
-                              if ($act['status'] == 2) {
-                                  echo "<span class='badge rounded-pill bg-warning'>Aktivitas Belum Selesai</span>";
-                              }else if ($act['status'] == 3) {
-                                  echo "<span class='badge rounded-pill bg-primary'>Aktivitas Sudah Selesai</span>";
-                              }
-                              ?>
+                            <td style="width: 30%">
+                              <?= $staf['kode_user']; ?>
+                            </td>
+                            <td style="width: 30%">
+                              <?= $staf['nama']; ?>
                             </td>
                             <td>
+                               <?= $staf['email']; ?>
+                            </td>
+                             <td>
+                               <a href="/koordinator/daftar_pengajuan_aktivitas/<?= $staf['kode_user']; ?>" class="btn btn-primary btn-sm">Go To Activity</a>
                             </td>
                           </tr>
                         <?php endforeach; ?>

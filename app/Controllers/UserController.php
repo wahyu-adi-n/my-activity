@@ -27,6 +27,7 @@ class UserController extends BaseController
             return redirect()->redirect("/login");
         } else {
             session()->set([
+                    'kode_user' => $cek['kode_user'],
                     'nama' => $cek['nama'],
                     'level' => $cek['level'],
                     'email' => $cek['email']]);
@@ -35,7 +36,7 @@ class UserController extends BaseController
                 return redirect()->redirect("/staf/pengajuan");
             } else {
                 session()->setFlashdata('success', 'Anda Berhasil Login!');
-                return redirect()->redirect("/koordinator/daftar_pengajuan_aktivitas");
+                return redirect()->redirect("/koordinator/daftar_staf");
             }
         }
     }
@@ -64,7 +65,7 @@ class UserController extends BaseController
     
     public function logout()
     {
-        $array_items = ['nama', 'email', 'level'];
+        $array_items = ['kode_user','nama', 'email', 'level'];
         session()->remove($array_items);
         session()->setFlashdata('success', 'Anda Berhasil Logout!');
         return redirect()->redirect("/login");
