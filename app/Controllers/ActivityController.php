@@ -8,12 +8,16 @@ class ActivityController extends BaseController
 {
     public function dashboard()
     {
-        return view('activity/index');
-    }
-    
-    public function addActivity()
-    {
-        return view('activity/add_activity');
+        if ((session()->get('level') == 'staf') || (session()->get('level') == 'koordinator')) {
+            return view('activity/dashboard', [
+                'list_title' => 'Daftar Aktivitas',
+                'add_title' => 'Tambah Aktivitas',
+                'activity' => model('ActivityModel')->getAllDataActivities(),
+            ]);
+        } else {
+            session()->setFlashdata('fail', 'Anda Belum Login!');
+            return redirect()->redirect('/login');
+        }
     }
     
     // public function addActivityProcess($kode)
