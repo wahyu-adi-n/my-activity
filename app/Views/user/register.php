@@ -39,7 +39,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="user_login">Nama</label>
-                      <input type="nama" name="log"
+                      <input type="text" name="nama"
                         class="form-control mb-3" 
                         placeholder="Masukkan Nama"
                         size="20"
@@ -47,11 +47,11 @@
                     </div>
                     <div class="form-group">
                       <label for="user_login">Email</label>
-                      <input type="email" name="log"
+                      <input type="email" name="email"
                         class="form-control mb-3" 
                         placeholder="Masukkan Email"
                         size="20"
-                        autofocus required>
+                        required>
                     </div>
                     <div class="form-group">
                       <label for="user_pass">Password</label>

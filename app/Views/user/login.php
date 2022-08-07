@@ -39,7 +39,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="user_login">Email</label>
-                      <input type="email" name="log"
+                      <input type="email" name="email"
                         class="form-control mb-3" 
                         placeholder="Masukkan Email"
                         size="20"

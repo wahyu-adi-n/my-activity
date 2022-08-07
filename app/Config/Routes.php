@@ -38,8 +38,11 @@ $routes->set404Override();
 $routes->get('/', 'UserController::login');
 $routes->get('/login', 'UserController::login');
 $routes->post('/login', 'UserController::loginProcess');
+$routes->post('/logout', 'UserController::logout');
 $routes->get('/register', 'UserController::register');
 $routes->post('/register', 'UserController::registerProcess');
+$routes->get('/dashboard', 'ActivityController::dashboard');
+
 
 /*
  * --------------------------------------------------------------------
