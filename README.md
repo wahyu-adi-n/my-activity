@@ -1,10 +1,5 @@
 # My-Activity
 
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
-
 This repository is built by Codeigniter 4
 [development repository](https://github.com/codeigniter4/CodeIgniter4).
 
