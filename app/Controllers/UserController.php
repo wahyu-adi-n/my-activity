@@ -27,12 +27,16 @@ class UserController extends BaseController
             return redirect()->redirect("/login");
         } else {
             session()->set([
-                'nama' => $cek['nama'],
-                'level' => $cek['level'],
-                'email' => $cek['email']
-            ]);
-            session()->setFlashdata('success', 'Anda Berhasil Login!');
-            return redirect()->redirect("/dashboard");
+                    'nama' => $cek['nama'],
+                    'level' => $cek['level'],
+                    'email' => $cek['email']]);
+            if ($cek['level'] == "staf") {
+                session()->setFlashdata('success', 'Anda Berhasil Login!');
+                return redirect()->redirect("/staf/pengajuan");
+            } else {
+                session()->setFlashdata('success', 'Anda Berhasil Login!');
+                return redirect()->redirect("/koordinator/daftar_pengajuan_aktivitas");
+            }
         }
     }
     

@@ -9,11 +9,14 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">my-Activity</a>
+        <a class="navbar-brand" href="/aktivitas">my-Activity</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">Aktivitas</a>
+              <a class="nav-link active" href="/pengajuan">Pengajuan</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link active" href="/aktivitas">Aktivitas</a>
             </li>
           </ul>
           <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
@@ -36,23 +39,8 @@
           <div class="row">
             <div class="container container--mini">
               <div class="row">
-                <div class="col-md-4">
-                  <h4 class="mt-3"><?= $add_title; ?></h4>
-                  <hr>
-                  <form>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Nama Tugas</label>
-                      <input type="text" class="form-control" name="nama" required autofocus>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
-                      <textarea rows="10" class="form-control" name="deskripsi" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                  </form>
-                </div>
-                <div class="col-md-8">
-                  <h4 class="text-center mt-3"><?= $list_title; ?></h4>
+                <div class="col-md-12">
+                  <h4 class="mt-3"><?= $aktivitas_title; ?></h4>
                   <hr>
                   <table class="table">
                       <thead>
@@ -60,16 +48,41 @@
                           <th scope="col">#</th>
                           <th scope="col">Nama</th>
                           <th scope="col">Deskripsi</th>
+                          <th scope="col">Status</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
+                        <?php 
+                          $no = 1;
+                          foreach ($activity as $act) :
+                        ?>
+                      
+                          <tr>
+                            <td><?= $no++; ?></td>
+                            <td>
+                            <?php
+                            if ($act['status'] == 3) {
+                              echo "<p class='text-decoration-line-through'>".$act['nama']."</p>";
+                            } else {
+                              echo $act['nama'];
+                            }
+                            ?>
+                            </td>
+                            <td><?= $act['deskripsi']; ?></td>
+                            <td>
+                              <?php 
+                              if ($act['status'] == 2) {
+                                  echo "<span class='badge rounded-pill bg-warning'>Aktivitas Belum Selesai</span>";
+                              }else if ($act['status'] == 3) {
+                                  echo "<span class='badge rounded-pill bg-primary'>Aktivitas Sudah Selesai</span>";
+                              }
+                              ?>
+                            </td>
+                            <td>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                 </div>

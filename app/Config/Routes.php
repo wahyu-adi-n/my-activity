@@ -41,7 +41,11 @@ $routes->post('/login', 'UserController::loginProcess');
 $routes->post('/logout', 'UserController::logout');
 $routes->get('/register', 'UserController::register');
 $routes->post('/register', 'UserController::registerProcess');
-$routes->get('/dashboard', 'ActivityController::dashboard');
+$routes->get('/koordinator/daftar_pengajuan_aktivitas', 'ActivityController::listOfActivity');
+$routes->get('/staf/pengajuan', 'ActivityController::pengajuan');
+$routes->get('/staf/aktivitas', 'ActivityController::aktivitas');
+$routes->post('/staf/aktivitas', 'ActivityController::addActivityProcess');
+
 
 
 /*
