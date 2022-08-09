@@ -63,7 +63,7 @@
                           <th scope="col">#</th>
                           <th scope="col">Nama Aktivitas</th>
                           <th scope="col">Status</th>
-                          <th scope="col">Action</th>
+            
                         </tr>
                       </thead>
                       <tbody>
@@ -95,8 +95,6 @@
                                   echo "<span class='badge rounded-pill bg-primary'>Aktivitas Sudah Selesai</span>";
                               }
                               ?>
-                            </td>
-                            <td>
                             </td>
                           </tr>
                         <?php endforeach; ?>

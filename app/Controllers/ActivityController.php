@@ -28,7 +28,6 @@ class ActivityController extends BaseController
                 'daftar_pengajuan_title' => 'Daftar Pengajuan Aktivitas',
                 'activity' => model('ActivityModel')->getAllDataActivities(),
             ]);
-            // var_dump(model('ActivityModel')->getAllDataActivities());
         } else {
             session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
             return redirect()->redirect('/login');
@@ -99,11 +98,13 @@ class ActivityController extends BaseController
     
     public function aktivitas()
     {
-        if ((session()->get('level') == 'staf') || (session()->get('level') == 'koordinator')) {
+        if (session()->get('level') == 'staf') {
+            $kode = session()->get('kode_user');
             return view('/staf/aktivitas', [
                 'aktivitas_title' => 'Daftar Aktivitas',
-                'activity' => model('ActivityModel')->getAllDataActiveActivities(),
+                'activity' => model('ActivityModel')->getAllDataActiveActivities($kode),
             ]);
+            // var_dump(model('ActivityModel')->getAllDataActiveActivities($kode));
         } else {
             session()->setFlashdata('fail', 'Anda Belum Login!');
             return redirect()->redirect('/login');

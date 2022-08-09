@@ -71,10 +71,15 @@
                             </td>
                             <td><?= $act['deskripsi']; ?></td>
                             <td>
-                              <?php 
-                              if ($act['status'] == 2) {
+                              <?php if($act['status'] == -1) {
+                                echo "<span class='badge rounded-pill bg-danger'>Aktivitas Tidak Disetujui</span>";
+                              } else if($act['status'] == 0) {
+                                echo "<span class='badge rounded-pill bg-dark'>Aktivitas Belum Disetujui</span>";
+                              } else if($act['status'] == 1) {
+                                echo "<span class='badge rounded-pill bg-success'>Aktivitas Sudah Disetujui</span>";
+                              }  else if ($act['status'] == 2) {
                                   echo "<span class='badge rounded-pill bg-warning'>Aktivitas Belum Selesai</span>";
-                              }else if ($act['status'] == 3) {
+                                }else if ($act['status'] == 3) {
                                   echo "<span class='badge rounded-pill bg-primary'>Aktivitas Sudah Selesai</span>";
                               }
                               ?>

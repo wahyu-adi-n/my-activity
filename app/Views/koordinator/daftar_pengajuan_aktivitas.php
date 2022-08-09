@@ -40,7 +40,10 @@
             <div class="container container--mini">
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="mt-3"><?= $daftar_pengajuan_title; ?></h4>
+                  <h4 class="mt-3"><?= 
+                  $daftar_pengajuan_title;
+                  ?>
+                  </h4>
                   <hr>
                   <table class="table">
                       <thead>
