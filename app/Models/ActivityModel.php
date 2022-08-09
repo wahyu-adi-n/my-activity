@@ -9,7 +9,7 @@ class ActivityModel extends Model
     protected $table = 'activity';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'kode_aktivitas', 'nama', 'kode_user',
+        'id', 'kode_aktivitas', 'nama', 'kode_user',
         'deskripsi', 'status'
     ];
     

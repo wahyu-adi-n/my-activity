@@ -89,7 +89,16 @@
                             <td>
                               <?php if($act['status'] == -1) {
                               } else if($act['status'] == 0) {
-                                echo "<a href='/koordinator/setuju/$act[kode_aktivitas]' class='btn btn-primary btn-sm me-1'>Setuju</a><a href='/koordinator/tolak/$act[kode_aktivitas]' class='btn btn-danger btn-sm'>Tolak</a>";
+                                echo "
+                                <form action='/koordinator/setuju' method='post'>
+                                  <input type='hidden' name='id' value='$act[id]'>
+                                  <input class='btn btn-primary btn-sm' type='submit' value='Setuju'>
+                                </form>
+                                <form action='/koordinator/tolak' method='post'>
+                                  <input type='hidden' name='id' value='$act[id]'>
+                                  <input class='btn btn-danger btn-sm' type='submit' value='Tolak'>
+                                </form>
+                                ";
                               } else if($act['status'] == 1) {
                               }  else if ($act['status'] == 2) {
                               }

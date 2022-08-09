@@ -28,6 +28,7 @@ class ActivityController extends BaseController
                 'daftar_pengajuan_title' => 'Daftar Pengajuan Aktivitas',
                 'activity' => model('ActivityModel')->getAllDataActivities(),
             ]);
+            // var_dump(model('ActivityModel')->getAllDataActivities());
         } else {
             session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
             return redirect()->redirect('/login');
@@ -47,13 +48,31 @@ class ActivityController extends BaseController
         }
     }
     
-    public function approveActivity($activity) 
+    public function approveActivity() 
     {
         if (session()->get('level') == 'koordinator'){
             $activity = new ActivityModel();
+            var_dump( $this->request->getVar('id'));
             $activity->save([
-                'kode_aktivitas' => $activity,
                 'status' => 1,
+                'id' => $this->request->getVar('id'),
+            ]);
+            session()->setFlashdata('success', 'Aktivitas Berhasil Disetujui!');
+            return redirect()->redirect("/koordinator/daftar_pengajuan_aktivitas");
+        } else {
+            session()->setFlashdata('fail', 'Anda Belum Login atau Role Tidak Sama!');
+            return redirect()->redirect('/login');
+        }
+    }
+    
+    public function rejectActivity() 
+    {
+        if (session()->get('level') == 'koordinator'){
+            $activity = new ActivityModel();
+            var_dump( $this->request->getVar('id'));
+            $activity->save([
+                'status' => -1,
+                'id' => $this->request->getVar('id'),
             ]);
             session()->setFlashdata('success', 'Aktivitas Berhasil Disetujui!');
             return redirect()->redirect("/koordinator/daftar_pengajuan_aktivitas");
